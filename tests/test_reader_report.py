@@ -4,6 +4,7 @@ from PIL import Image
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'ppt-evaluation/scripts'))
 from reader_report import render_reader
 from report import refresh
+from compare_report import comparison_data, render_comparison
 
 class ReaderReport(unittest.TestCase):
  def fixture(self,p):
@@ -22,6 +23,24 @@ class ReaderReport(unittest.TestCase):
   with tempfile.TemporaryDirectory()as t:
    p=Path(t);d,rules=self.fixture(p);d['assessments'][4].update(status='BAD',rating=1,issues=[{'id':'d1','root_defect_id':'deck1','primary_rule':'D01','affected_pages':[1,2],'problem':'缺规定图表','repair':'补图','location':'两页图表区','severity':'P1','requires_redraw':True}]);refresh(d,rules);render_reader(d,p/'report.html',rules)
    main=(p/'report.html').read_text();self.assertIn('id="page-2"',main);self.assertIn('全稿只计一次',main);self.assertEqual(len(d['scores']['issues']),2)
+ def test_reader_percent_labels_and_deck_removal_preserve_scores(self):
+  with tempfile.TemporaryDirectory()as t:
+   p=Path(t);d,rules=self.fixture(p);before=copy.deepcopy(d['scores']);render_reader(d,p/'report.html',rules);main=(p/'report.html').read_text()
+   self.assertIn('75分 · 基本有效',main);self.assertNotIn('3/4',main);self.assertNotIn('<h3>需要调整</h3>',main);self.assertNotIn('当前未保留整稿修改项',main);self.assertEqual(d['scores'],before)
+ def test_comparison_keeps_distinct_scores_and_inputs_unchanged(self):
+  with tempfile.TemporaryDirectory()as t:
+   p=Path(t);a,rules=self.fixture(p);b=copy.deepcopy(a);b['assessments'][0]['rating']=1;refresh(b,rules);before=copy.deepcopy([a,b]);entries=[{'label':'Platform A','report':'a/report.html','result':a},{'label':'Platform B','report':'b/report.html','result':b}]
+   data=comparison_data(entries);self.assertTrue(data['same_task']);self.assertNotEqual(data['decks'][0]['layers']['object']['observed_score'],data['decks'][1]['layers']['object']['observed_score']);render_comparison(entries,p/'index.html')
+   self.assertEqual([a,b],before);self.assertEqual(len(data['decks']),2)
+   if shutil.which('node'):
+    script="const {calculate}=require(process.argv[1]);const d=JSON.parse(process.argv[2]);for(const x of d.decks){const w=Object.fromEntries(Object.values(x.layers).flatMap(l=>l.rules).map(r=>[r.rule_id,r.weight]));const s=calculate(x,w,{object:1,slide:1,deck:1});if(s.score===null)throw Error('Expected score');}console.log('PASS');"
+    r=subprocess.run(['node','-e',script,str(ROOT/'ppt-evaluation/assets/score-explorer.js'),json.dumps(data)],capture_output=True,text=True);self.assertEqual(r.returncode,0,r.stderr)
+ def test_comparison_rejects_mixed_rubrics_and_unsafe_report(self):
+  with tempfile.TemporaryDirectory()as t:
+   p=Path(t);a,rules=self.fixture(p);b=copy.deepcopy(a);b['rubric_version']='different';entries=[{'label':'A','report':'a.html','result':a},{'label':'B','report':'b.html','result':b}]
+   with self.assertRaises(ValueError):comparison_data(entries)
+   b['rubric_version']=a['rubric_version'];entries[1]['report']='javascript:alert(1)'
+   with self.assertRaises(ValueError):comparison_data(entries)
  @unittest.skipUnless(shutil.which('node'),'Node needed for browser calculation parity test')
  def test_weight_engine_missing_values_page_weights_and_scope(self):
   js=str(ROOT/'ppt-evaluation/assets/score-explorer.js')

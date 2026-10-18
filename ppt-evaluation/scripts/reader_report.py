@@ -14,7 +14,8 @@ def _image(path):
 def _rating(row):
     if row['status']=='NOT_APPLICABLE':return '不适用'
     if row['rating']is None:return '待核验'
-    return str(row['rating'])+'/4'
+    labels={0:'核心失败',1:'严重阻碍',2:'明确需修',3:'基本有效',4:'优秀'}
+    return str(row['rating']*25)+'分 · '+labels[row['rating']]
 
 def _positive(row):
     # Reviewed BAD/UNKNOWN narratives may still mention deleted defects. Never reuse them.
@@ -54,20 +55,14 @@ def render_reader(result,out,rules):
     if not positives:chunks.append('<p class="muted">当前结果没有可确定的正向整稿评价。</p>')
     for a in positives:
         chunks.append('<div class="positive"><small>'+H(rule_by[a['rule_id']]['name'])+' · '+_rating(a)+'</small><p>'+H(_positive(a))+'</p></div>')
-    chunks.append('<h3>需要调整</h3>')
-    deck_groups=collections.defaultdict(list)
-    for i in issues:
-        if rule_by[i['primary_rule']]['level']=='deck':deck_groups[i['primary_rule']].append(i)
-    if not deck_groups:chunks.append('<p class="muted">当前未保留整稿修改项；不代表未核验内容已通过。</p>')
-    for rid,group in deck_groups.items():
-        row=by[(rid,None)];chunks.append('<div class="narrative-group"><div class="problem-title"><b>'+H(rule_by[rid]['name'])+'</b><span class="rating">'+_rating(row)+'</span></div>')
-        for i in group[:2]:chunks.append('<p>'+B(i['problem'])+'</p>')
-        if len(group)>2:chunks.append('<p class="muted">另有'+str(len(group)-2)+'项，见相应页面的修改建议。</p>')
-        chunks.append('</div>')
-    unknown_deck=[rule_by[a['rule_id']]['name']for a in rows if a['page']is None and a['status']=='UNCERTAIN']
-    if unknown_deck:chunks.append('<p class="scope">待核验：'+H('、'.join(unknown_deck))+'。</p>')
     chunks.append('</div></div></section><section class="section" id="pages"><h2>逐页 · 只看需要修改的页面</h2><p class="scope">'+str(len(problem_pages))+'页有保留修改项；其余'+str(len(pages)-len(problem_pages))+'页不展开。未展开不等于全部核验通过。</p><p class="score-rule-note">每页每维度只记一次0—4评分，多条问题不逐条累加扣分；标为“整稿关联”的项目只在整稿计分一次。</p>')
     keep_notes={d['issue_id']:d['reason']for d in result.get('review',{}).get('decisions',[])if d.get('action')=='keep'}
+    unlocated=[i for i in issues if not i['affected_pages']]
+    if unlocated:
+        chunks.append('<article class="page-detail"><h3>跨页修改</h3>')
+        for i in unlocated:
+            chunks.append('<div class="issue"><p>'+B(i['problem'])+'</p><p class="fix"><b>怎么改：</b>'+B(i['repair'])+'</p></div>')
+        chunks.append('</article>')
     for p in problem_pages:
         n=p['page'];grouped=collections.defaultdict(list)
         for i in affected[n]:grouped[i['primary_rule']].append(i)
@@ -82,7 +77,7 @@ def render_reader(result,out,rules):
                 if i['id']in keep_notes:chunks.append('<p class="review-note">复核补充：'+H(keep_notes[i['id']])+'</p>')
                 chunks.append('</div>')
             chunks.append('</div>')
-        chunks.append('<details><summary>本页各项评分</summary><div class="table-wrap"><table><tr><th>维度</th><th>评分 /4</th></tr>')
+        chunks.append('<details><summary>本页各项评分</summary><div class="table-wrap"><table><tr><th>维度</th><th>评分（百分制）</th></tr>')
         for a in rows:
             if a['page']==n:chunks.append('<tr><td>'+H(rule_by[a['rule_id']]['name'])+'</td><td>'+_rating(a)+'</td></tr>')
         chunks.append('</table></div></details></div></div></article>')

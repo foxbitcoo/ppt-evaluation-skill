@@ -38,6 +38,7 @@
     return {layers, score, coverage, excluded, pages, complete: baselineComplete && !excluded && data.mappingVerified ? score : null};
   }
   if (typeof module !== 'undefined' && module.exports) module.exports = {calculate};
+  if (typeof window !== 'undefined') window.PPTScoreExplorer = {calculate};
   if (typeof document === 'undefined') return;
   const node = document.getElementById('score-data');
   if (!node) return;
