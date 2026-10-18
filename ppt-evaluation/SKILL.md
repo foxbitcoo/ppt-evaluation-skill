@@ -47,4 +47,4 @@ python scripts/evaluate.py --manifest /path/run/manifest.json --context /path/co
 
 [README与架构图](README.md)供用户阅读；[公开来源与许可](references/sources.md)解释量表来源边界。公开包不包含客户PPT、内部表格、WorkBuddy文档全文、凭据或私有运行记录。旧对象协议v0.1结果与v0.2不能直接混算；保留历史并重新prepare/评测。旧`ppt-quality-check`可作为本地兼容入口，但不是安装依赖。
 
-用户要求“Report to Issue”时，先整理脱敏问题、版本和最小复现；通过安装来源仓库的GitHub Issues提交前，展示公开安全的内容供确认。私有页面和提示词不默认上传。正常执行不自动检查更新或安装启动钩子。
+用户要求“Report to Issue”时，先整理脱敏问题、版本和最小复现；通过[公开仓库的GitHub Issues](https://github.com/foxbitcoo/ppt-evaluation-skill/issues)提交前，展示公开安全的内容供确认。私有页面和提示词不默认上传。正常执行不自动检查更新或安装启动钩子。

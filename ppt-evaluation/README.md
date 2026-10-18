@@ -58,6 +58,6 @@ v0.2从逐原生对象改为按页评测；旧v0.1数据不可直接混算，须
 
 原创程序和规则采用[MIT](LICENSE)。[来源索引](references/sources.md)保留参考项目与许可边界，不代表复制其实现或采用其现成总分公式。包中不含客户PPT、公司评测表、WorkBuddy内部文档或凭据。
 
-建议独立公开仓库名：`ppt-evaluation-skill`。当前为本地发布候选，尚未配置公开远端；发布后以该仓库为更新来源，更新时替换Skill目录，不安装全局自动更新钩子。
+公开源码与更新来源：[foxbitcoo/ppt-evaluation-skill](https://github.com/foxbitcoo/ppt-evaluation-skill)。首次安装可克隆仓库，再将`ppt-evaluation/`复制到Agent的skills目录；更新时在克隆目录执行`git pull --ff-only`，再替换已安装的Skill目录。不安装全局自动更新钩子。
 
-问题可在安装来源仓库的Issues反馈版本、最小复现和脱敏结果；不要上传私有PPT、完整提示词或密钥。安全问题见[SECURITY.md](SECURITY.md)。
+问题可在[GitHub Issues](https://github.com/foxbitcoo/ppt-evaluation-skill/issues)反馈版本、最小复现和脱敏结果；不要上传私有PPT、完整提示词或密钥。安全问题见[SECURITY.md](SECURITY.md)。
