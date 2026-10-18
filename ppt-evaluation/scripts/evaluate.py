@@ -70,7 +70,7 @@ def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--manifest',required=True); ap.add_argument('--context'); ap.add_argument('--out',required=True)
     ap.add_argument('--model',default='deepseek-flash'); ap.add_argument('--base-url',default='https://api.deepseek.com'); ap.add_argument('--max-calls',type=int,default=12)
     ap.add_argument('--max-output-tokens',type=int,default=8192); ap.add_argument('--retries',type=int,default=1); ap.add_argument('--timeout',type=int,default=120)
-    ap.add_argument('--save-trace',action='store_true'); ap.add_argument('--level-weights'); args=ap.parse_args()
+    ap.add_argument('--score-policy',choices=['ideal-delivery@0.3.0','audit@0.2.0']); ap.add_argument('--save-trace',action='store_true'); ap.add_argument('--level-weights'); args=ap.parse_args()
     endpoint=urllib.parse.urlsplit(args.base_url)
     if endpoint.username or endpoint.password or endpoint.query or endpoint.fragment or not(endpoint.scheme=='https' or endpoint.scheme=='http' and endpoint.hostname in {'localhost','127.0.0.1','::1'}): raise ValueError('Use HTTPS; unencrypted endpoints allowed only on localhost')
     if args.max_calls < 1 or not 0 <= args.retries <= 2 or not 1 <= args.timeout <= 300: raise ValueError('Invalid call/retry/timeout budget')
@@ -80,6 +80,8 @@ def main():
     if (out/'result.json').exists(): raise ValueError('Output already contains a result; choose a fresh run directory')
     manifest=json.loads(Path(args.manifest).read_text()); context=json.loads(Path(args.context).read_text()) if args.context else {}
     if manifest.get('evaluation_unit')!='rendered_page': raise ValueError('Prepare a v0.2 page-based manifest first')
+    if args.score_policy: context['score_policy']=args.score_policy
+    context.setdefault('score_policy','ideal-delivery@0.3.0')
     rule_doc=json.loads((ROOT/'references/rubric.json').read_text()); rules=rule_doc['rules']; pages=[p['page']for p in manifest['pages']]
     if len(pages)!=len(set(pages)) or not pages: raise ValueError('Source pages must be nonempty and unique')
     rows=[]; calls=[]; events=[]; candidates=[]; history=[]; page_summaries=[]; decisions=[]; answered=[]; begin=time.monotonic()

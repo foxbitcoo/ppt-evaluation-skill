@@ -17,7 +17,7 @@ body{font-variant-numeric:tabular-nums}
 .page-summary{line-height:1.6;margin:0 0 16px}
 .weights .table-wrap table{table-layout:fixed;min-width:640px}
 .weights th:first-child,.weights td:first-child{width:44%}
-.weights th:not(:first-child),.weights td:not(:first-child){width:14%;text-align:right;font-variant-numeric:tabular-nums}
+.weights th:not(:first-child),.weights td:not(:first-child){width:18.6667%;text-align:right;font-variant-numeric:tabular-nums}
 .weights input[type=number]{width:76px;max-width:100%;height:36px;text-align:right}
 .layer-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .layer-controls label{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}

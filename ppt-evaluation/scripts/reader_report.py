@@ -13,7 +13,8 @@ def _image(path):
 
 def _rating(row):
     if row['status']=='NOT_APPLICABLE':return '不适用'
-    if row['rating']is None:return '待核验'
+    if row.get('score_basis')=='delivery_gap':return str(row['effective_score'])+'分 · 交付不足'
+    if row['rating']is None:return '评测未完成'
     labels={0:'核心失败',1:'严重阻碍',2:'明确需修',3:'基本有效',4:'优秀'}
     return str(row['rating']*25)+'分 · '+labels[row['rating']]
 
@@ -24,7 +25,7 @@ def _positive(row):
 
 def _debug(result,path):
     body=['<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>PPT评测调试资料</title><style>body{font:14px/1.7 monospace;max-width:1100px;margin:35px auto;padding:20px}pre{white-space:pre-wrap;overflow-wrap:anywhere}summary{cursor:pointer}</style><h1>调试资料</h1><p>包括原始历史意见与复核记录；历史文字不是最终结论。</p>']
-    for title,key in [('输入清单','manifest'),('场景与来源','context'),('最终判项','assessments'),('评分数据','scores'),('复核','review'),('复核历史','review_history'),('模型历史意见','model_history'),('校验与候选','validation'),('调用与耗时','process')]:
+    for title,key in [('输入清单','manifest'),('场景与来源','context'),('最终判项','assessments'),('评分数据','scores'),('原始事实审计分','audit_scores'),('理想交付评分','delivery'),('局部复核','score_policy_review'),('复核','review'),('复核历史','review_history'),('模型历史意见','model_history'),('校验与候选','validation'),('调用与耗时','process')]:
         body+=['<details><summary>'+title+'</summary><pre>'+H(json.dumps(result.get(key),ensure_ascii=False,indent=2))+'</pre></details>']
     extra=result.get('report_metadata',{}).get('debug_url')
     if extra and urlsplit(str(extra)).scheme.lower()in {'','http','https'}:body.append('<p><a href="'+H(str(extra),quote=True)+'">完整白盒运行记录</a></p>')
@@ -32,17 +33,17 @@ def _debug(result,path):
 
 def render_reader(result,out,rules):
     out=Path(out);debug=out.with_name(out.stem+'-debug.html');_debug(result,debug)
-    s=result['scores'];rows=result['assessments'];meta=result.get('report_metadata',{});rule_by={r['id']:r for r in rules};by={(a['rule_id'],a['page']):a for a in rows};issues=s['issues'];pages=result['manifest']['pages']
+    s=result['scores'];rows=result.get('delivery',{}).get('rows',result['assessments']);meta=result.get('report_metadata',{});rule_by={r['id']:r for r in rules};by={(a['rule_id'],a['page']):a for a in rows};issues=s['issues'];pages=result['manifest']['pages']
     title=str(meta.get('title','PPT质量评测'));platform=str(meta.get('platform',''));basis=str(meta.get('review_label','本轮评测结果 · 未经人工标定'))
     images={p['page']:_image(p['image'])for p in pages}
     affected={p['page']:[i for i in issues if p['page']in i['affected_pages']]for p in pages};problem_pages=[p for p in pages if affected[p['page']]]
     default_layers=dict(zip(LABELS,result.get('layer_weights')or[1,1,1]))
     data={'rubric_version':result.get('rubric_version',''),'layers':s['levels'],'mappingVerified':bool(result.get('context',{}).get('page_mapping_reviewed')or result['manifest'].get('page_mapping_status')=='EXPLICIT_SOURCE_PAGE_MAP'),
-          'pages':[{'page':p['page'],'rows':[{'rule_id':a['rule_id'],'level':rule_by[a['rule_id']]['level'],'rating':a['rating'],'status':a['status']}for a in rows if a['page']==p['page']]}for p in pages]}
+          'pages':[{'page':p['page'],'rows':[{'rule_id':a['rule_id'],'level':rule_by[a['rule_id']]['level'],'rating':a['effective_score']/25 if a.get('effective_score')is not None else a['rating'],'status':a['status']}for a in rows if a['page']==p['page']]}for p in pages]}
     chunks=['<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+H(title+' · '+platform)+'</title><style>'+(ROOT/'assets/reader-report.css').read_text()+'</style><main><header><p class="eyebrow">PRESENTATION REVIEW</p><h1>'+H(title)+'</h1><p class="subtitle">'+H(platform+' · '+str(len(pages))+'页 · '+basis)+'</p><nav class="nav"><a href="#overview">评分总览</a><a href="#deck">整稿逻辑</a><a href="#pages">逐页修改</a><a href="#weights">评分与权重</a></nav></header>']
-    chunks.append('<section id="overview"><div class="overview"><div class="score-box total"><h2>综合观察分</h2><strong class="number"><span data-total>—</span><span class="unit"> /100</span></strong><p>权重试算 · 覆盖 <span data-total-coverage>—</span></p></div>')
-    for lev,title_ in LABELS.items():chunks.append('<div class="score-box"><h2>'+title_+'</h2><strong class="number"><span data-layer-score="'+lev+'">—</span><span class="unit"> /100</span></strong><p>已评覆盖 <span data-layer-coverage="'+lev+'">—</span> · 权重 <span data-layer-share="'+lev+'">—</span></p></div>')
-    chunks.append('</div><p class="scope"><span data-complete>完整总分尚未形成</span>；部分内容待核验。调权只改变汇总，不会重新判断问题。</p></section>')
+    chunks.append('<section id="overview"><div class="overview"><div class="score-box total"><h2>综合评分</h2><strong class="number"><span data-total>—</span><span class="unit"> /100</span></strong><p>按理想交付标准评分</p></div>')
+    for lev,title_ in LABELS.items():chunks.append('<div class="score-box"><h2>'+title_+'</h2><strong class="number"><span data-layer-score="'+lev+'">—</span><span class="unit"> /100</span></strong><p>权重 <span data-layer-share="'+lev+'">—</span></p></div>')
+    chunks.append('</div><p class="scope">缺必要证据或讲稿按40分计入；技术故障不扣作品分。调权只改变汇总。</p></section>')
     # One composed sheet, with page order always visible.
     chunks.append('<section class="section" id="deck"><h2>整稿 · 叙事与一致性</h2><div class="spread"><figure class="visual"><div class="sheet" aria-label="整稿页序拼图">')
     for p in pages:
@@ -55,7 +56,7 @@ def render_reader(result,out,rules):
     if not positives:chunks.append('<p class="muted">当前结果没有可确定的正向整稿评价。</p>')
     for a in positives:
         chunks.append('<div class="positive"><small>'+H(rule_by[a['rule_id']]['name'])+' · '+_rating(a)+'</small><p>'+H(_positive(a))+'</p></div>')
-    chunks.append('</div></div></section><section class="section" id="pages"><h2>逐页 · 只看需要修改的页面</h2><p class="scope">'+str(len(problem_pages))+'页有保留修改项；其余'+str(len(pages)-len(problem_pages))+'页不展开。未展开不等于全部核验通过。</p><p class="score-rule-note">每页每维度只记一次0—4评分，多条问题不逐条累加扣分；标为“整稿关联”的项目只在整稿计分一次。</p>')
+    chunks.append('</div></div></section><section class="section" id="pages"><h2>逐页 · 只看需要修改的页面</h2><p class="scope">'+str(len(problem_pages))+'页有保留修改项；其余'+str(len(pages)-len(problem_pages))+'页不展开。实际问题和改法见下方。</p><p class="score-rule-note">每页每维度只记一次0—4评分，多条问题不逐条累加扣分；标为“整稿关联”的项目只在整稿计分一次。</p>')
     keep_notes={d['issue_id']:d['reason']for d in result.get('review',{}).get('decisions',[])if d.get('action')=='keep'}
     unlocated=[i for i in issues if not i['affected_pages']]
     if unlocated:
@@ -66,7 +67,7 @@ def render_reader(result,out,rules):
     for p in problem_pages:
         n=p['page'];grouped=collections.defaultdict(list)
         for i in affected[n]:grouped[i['primary_rule']].append(i)
-        redraw=any(i['requires_redraw']for i in affected[n]);chunks.append('<article class="page-detail" id="page-'+str(n)+'"><div class="page-head"><h2>第'+str(n)+'页</h2><span>'+('需要重画或重构'if redraw else'局部修改后复核')+'</span></div><div class="spread"><figure class="visual"><button type="button" class="page-image" data-page-zoom aria-label="放大第'+str(n)+'页原图"><img loading="lazy" src="'+images[n]+'" alt="第'+str(n)+'页原图"></button><figcaption>原始页面 · 点击放大</figcaption></figure><div class="right"><p class="page-summary">页内细节 <b data-page-score="'+str(n)+'-object">—</b> /100　单页表达 <b data-page-score="'+str(n)+'-slide">—</b> /100（均为已评范围）</p>')
+        redraw=any(i['requires_redraw']for i in affected[n]);chunks.append('<article class="page-detail" id="page-'+str(n)+'"><div class="page-head"><h2>第'+str(n)+'页</h2><span>'+('需要重画或重构'if redraw else'局部修改后复核')+'</span></div><div class="spread"><figure class="visual"><button type="button" class="page-image" data-page-zoom aria-label="放大第'+str(n)+'页原图"><img loading="lazy" src="'+images[n]+'" alt="第'+str(n)+'页原图"></button><figcaption>原始页面 · 点击放大</figcaption></figure><div class="right"><p class="page-summary">页内细节 <b data-page-score="'+str(n)+'-object">—</b> /100　单页表达 <b data-page-score="'+str(n)+'-slide">—</b> /100</p>')
         for rid,group in grouped.items():
             is_deck=rule_by[rid]['level']=='deck';row=by[(rid,None if is_deck else n)]
             chunks.append('<div class="issue-group"><div class="problem-title"><h3>'+H(rule_by[rid]['name'])+'</h3><span class="rating">'+_rating(row)+'</span></div>')
@@ -81,16 +82,16 @@ def render_reader(result,out,rules):
         for a in rows:
             if a['page']==n:chunks.append('<tr><td>'+H(rule_by[a['rule_id']]['name'])+'</td><td>'+_rating(a)+'</td></tr>')
         chunks.append('</table></div></details></div></div></article>')
-    if not problem_pages:chunks.append('<p>当前未保留需要修改的页面；请结合待核验项阅读。</p>')
-    chunks.append('</section><section class="section" id="weights"><details class="weights"><summary>24项评分与可调权重</summary><p class="formula">单项0—4分 ×25 → 100分制；先跨页平均同一维度，再按维度权重形成三个视角分，最后按三个视角权重合成综合观察分。</p><div class="layer-controls">')
+    if not problem_pages:chunks.append('<p>当前没有页面修改项。</p>')
+    chunks.append('</section><section class="section" id="weights"><details class="weights"><summary>24项评分与可调权重</summary><p class="formula">单项0—4分 ×25 → 100分制；先跨页平均同一维度，再按维度权重形成三个视角分，最后按三个视角权重合成综合评分。</p><div class="layer-controls">')
     for lev,label in LABELS.items():chunks.append('<label>'+label+'<input aria-label="'+label+'权重" type="number" min="0" max="100" step="0.1" data-layer-weight="'+lev+'" value="'+str(default_layers[lev])+'"></label>')
     chunks.append('</div><p class="scope">默认三视角等权，层内各维度等权；这是试算配置，不是行业标准。权重为0表示明确排除该项，页面会标明范围变化。</p>')
     for lev,title_ in LABELS.items():
-        chunks.append('<h3>'+title_+'</h3><div class="table-wrap"><table><tr><th>维度</th><th>均分 /4</th><th>折算 /100</th><th>已评范围</th><th>相对权重</th></tr>')
+        chunks.append('<h3>'+title_+'</h3><div class="table-wrap"><table><tr><th>维度</th><th>均分 /4</th><th>折算 /100</th><th>相对权重</th></tr>')
         for r in s['levels'][lev]['rules']:
-            mean=r['mean_rating'];formatted='待核验'if r['applicable']else'不适用';score='—'if mean is None else f'{mean*25:.1f}';coverage=f'{r["coverage"]:.1%}'if r['applicable']else'不适用'
-            chunks.append('<tr><td>'+H(r['name'])+'</td><td>'+(f'{mean:.2f}'if mean is not None else formatted)+'</td><td>'+score+'</td><td>'+coverage+'</td><td><input type="number" min="0" max="100" step="0.1" aria-label="'+H(r['name'])+'权重" data-rule-weight="'+r['rule_id']+'" value="'+str(r['weight'])+'"></td></tr>')
+            mean=r['mean_rating'];formatted='评测未完成'if r['applicable']else'不适用';score='—'if mean is None else f'{mean*25:.1f}';coverage=f'{r["coverage"]:.1%}'if r['applicable']else'不适用'
+            chunks.append('<tr><td>'+H(r['name'])+'</td><td>'+(f'{mean:.2f}'if mean is not None else formatted)+'</td><td>'+score+'</td><td><input type="number" min="0" max="100" step="0.1" aria-label="'+H(r['name'])+'权重" data-rule-weight="'+r['rule_id']+'" value="'+str(r['weight'])+'"></td></tr>')
         chunks.append('</table></div>')
-    chunks.append('<div class="controls"><button class="control" id="reset-weights">恢复默认</button></div><p class="scope" data-weight-note></p><p class="error" data-weight-error role="status"></p></details></section><footer class="footer"><p>页面与评分来自同一结果版本；权重调整仅在本页试算，不改原评分、不调用模型。未经人工标定，不以不完整观察分直接排名。</p><a href="'+H(debug.name)+'">调试资料</a></footer></main><dialog id="page-lightbox"><img alt=""><div class="controls"><p></p><button class="control" type="button">关闭</button></div></dialog>')
+    chunks.append('<div class="controls"><button class="control" id="reset-weights">恢复默认</button></div><p class="scope" data-weight-note></p><p class="error" data-weight-error role="status"></p></details></section><footer class="footer"><p>页面、解释与评分来自同一结果版本；调整权重不触发模型调用。本轮为研究量表。</p><a href="'+H(debug.name)+'">调试资料</a></footer></main><dialog id="page-lightbox"><img alt=""><div class="controls"><p></p><button class="control" type="button">关闭</button></div></dialog>')
     chunks.append('<script type="application/json" id="score-data">'+json.dumps(data,ensure_ascii=False).replace('<','\\u003c')+'</script><script>'+(ROOT/'assets/score-explorer.js').read_text()+'</script></html>')
     out.write_text(''.join(chunks));return out

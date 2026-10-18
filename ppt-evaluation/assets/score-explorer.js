@@ -61,7 +61,7 @@
       }
       const den=Object.values(layers).reduce((n,w)=>n+w,0);
       layerNodes.forEach(n => text('[data-layer-share="'+n.dataset.layerWeight+'"]',(layers[n.dataset.layerWeight]/den*100).toFixed(1)+'%'));
-      text('[data-weight-note]',current.excluded?'当前自定义范围排除了 '+current.excluded+' 个视角或适用维度；仍不是全范围完整分。':'按当前权重，仅汇总已评分项目；未知项不补分，仍计入覆盖率。');
+      text('[data-weight-note]',current.excluded?'当前自定义范围排除了 '+current.excluded+' 个视角或适用维度；仍不是全范围完整分。':'按当前权重汇总交付质量分。');
       for (const [page,scores] of Object.entries(current.pages)) for (const [level,score] of Object.entries(scores)) text('[data-page-score="'+page+'-'+level+'"]',fmt(score));
       document.querySelectorAll('[data-excluded-rule]').forEach(n=>n.textContent=rules[n.dataset.excludedRule]===0?'当前权重为0：问题保留，不参与试算。':'');
       text('[data-weight-error]','');

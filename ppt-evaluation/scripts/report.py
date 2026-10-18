@@ -69,6 +69,11 @@ def aggregate(assessments, rules, weights=None, manifest=None, inventories=None,
 def refresh(result, rules):
     result['assessments'] = canonical_rows(result['assessments'], rules, result['manifest'], result.get('context', {}))
     result['scores'] = aggregate(result['assessments'], rules, result.get('layer_weights'), result['manifest'], context=result.get('context', {}))
+    if result.get('context', {}).get('score_policy') == 'ideal-delivery@0.3.0':
+        from delivery_score import build_delivery
+        result['audit_scores'] = copy.deepcopy(result['scores'])
+        result['delivery'] = build_delivery(result, rules, result.get('context', {}).get('evidence_gap_score', 40))
+        result['scores'] = result['delivery']['scores']
     # Final findings never come from a stale model summary.
     result['final_summary'] = {'assessed_pages': sorted({a['page'] for a in result['assessments'] if a['page'] is not None and a['rating'] is not None}),
                                'open_issues': [{'id': i['id'], 'problem': i['problem'], 'affected_pages': i['affected_pages']} for i in result['scores']['issues']],

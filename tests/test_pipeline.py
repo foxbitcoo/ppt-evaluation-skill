@@ -37,5 +37,5 @@ class EndToEnd(unittest.TestCase):
         a={(x['page'],x['rule_id']):x for x in d['assessments']};self.assertIsNone(a[(1,'O01')]['rating']);self.assertEqual(a[(1,'S01')]['rating'],3);self.assertEqual(a[(2,'O01')]['rating'],3)
         self.assertEqual(d['review']['status'],'COMPLETE');self.assertIsNone(d['scores']['overall_complete'])
     def test_call_budget_exhaustion_is_reported_as_unknown(self):
-        d,requests=self.run_pipeline(1);self.assertEqual(len(requests),1);self.assertEqual(d['source_pages_missing'],[2]);self.assertEqual(d['review']['status'],'NOT_RUN');self.assertEqual(d['scores']['levels']['deck']['coverage'],0)
+        d,requests=self.run_pipeline(1);self.assertEqual(len(requests),1);self.assertEqual(d['source_pages_missing'],[2]);self.assertEqual(d['review']['status'],'NOT_RUN');self.assertEqual(d['audit_scores']['levels']['deck']['coverage'],0)
 if __name__=='__main__':unittest.main()

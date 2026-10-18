@@ -14,3 +14,11 @@ artifacts/
 *.pptx
 *.pdf
 *.zip
+report-assets/
+*-contact-sheet.png
+analysis-input.json
+insights*.json
+call-*-request.json
+call-*-response.json
+report*.html
+comparison*.html

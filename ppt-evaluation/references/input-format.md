@@ -53,3 +53,8 @@ result.json保存最终规范化判项、三层分数、判项覆盖率、未知
 `requirement_id`是任务缺项的唯一归属，不是背景标签。只有该缺陷本身违反该项明确要求才填写；同一ID跨单页/整稿或不同kind均只扣一次。普通文字、可读性或配色缺陷留null。单页问题不得关联别页。
 
 可选的`report_metadata`仅控制阅读版标题与展示：title、platform、review_label、storyline（依据实际页序整理，不能来自过时诊断）和debug_url。主报告支持本地权重试算；调权只影响当前页面，真实评分与问题保持原结果版本。
+
+
+## 理想交付评分与比较分析（0.3）
+
+context新增`score_policy: "ideal-delivery@0.3.0"`（evaluate默认启用）和`evidence_gap_score: 40`。结果保留原assessments与audit_scores；delivery含派生rows/scores/evaluation_failures，不能将40分证据差距改写成事实错误。多份entries含id/label/result_file/report。`analyze_comparison.py`将最终评分、真实原页、整稿拼图与证据清单发送到已授权模型，生成可按deck_id/page_numbers绑定的insights。`compare_report.py --insights`检查分数、推荐者、页码与证据ID后呈现。
