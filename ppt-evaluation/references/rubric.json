@@ -1,0 +1,257 @@
+{
+  "version": "ppt-evaluation@0.2.0",
+  "status": "PROVISIONAL_NOT_CALIBRATED",
+  "rating_range": [
+    0,
+    4
+  ],
+  "level_weights": null,
+  "rules": [
+    {
+      "id": "O01",
+      "level": "object",
+      "name": "文字与术语正确",
+      "definition": "错别字、乱码、残留占位符、术语误用。人名/专名需字典或上下文，不确定不强判。",
+      "evidence_required": "文字清晰可读；标出页码、可见位置与原句",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "O02",
+      "level": "object",
+      "name": "数字与事实准确",
+      "definition": "数值、计算、年份、单位、事实与假设区分；只凭页面不能证明外部事实真实。",
+      "evidence_required": "原页文字/图表值＋提供的一手事实或内部可算反证",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "O03",
+      "level": "object",
+      "name": "对象可读与可辨",
+      "definition": "文字对比、字形、小字、图片模糊、图标辨识；按实际观看场景判断。",
+      "evidence_required": "足够分辨率的对象区域，不臆报字号",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "O04",
+      "level": "object",
+      "name": "对象边界与完整性",
+      "definition": "对象出画布、对象自身内容被裁切、长文本溢出；全出血图和有意裁图是例外。",
+      "evidence_required": "实际页面像素与具体位置；结构出界只作辅助",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "O05",
+      "level": "object",
+      "name": "图片质量与比例",
+      "definition": "拉伸、错误裁切、生成伪影、低清、主体被误切；只评价可见质量。",
+      "evidence_required": "实际图像对象与已知原图（若有）",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "O06",
+      "level": "object",
+      "name": "图表编码与标注",
+      "definition": "坐标轴、起点、比例、单位、图例、数据标签与映射正确；装饰图不当统计图。 直接标签、单位和共同基线足以解释时，无完整纵轴不自动判错；先证明编码或理解受损。",
+      "evidence_required": "完整清晰图表；无图表则N/A",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "O07",
+      "level": "object",
+      "name": "引用与来源可追溯",
+      "definition": "来源能定位到资料/版本/时间；有引用不等于已验证事实，URL安全可访问另标。",
+      "evidence_required": "引用对象与所提供源；若无待引用事实可N/A",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "O08",
+      "level": "object",
+      "name": "信息辨识与颜色编码",
+      "definition": "按页面可见效果检查标签可辨识、颜色是否有第二编码。原生alt text、屏幕阅读顺序不纳入默认截图评分，需要时专项验收。",
+      "evidence_required": "页面可见标签、图例与第二编码；不能从截图推断原生alt text",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "S01",
+      "level": "slide",
+      "name": "主旨与证据对应",
+      "definition": "标题/主张/数据/图形支持同一页目的；不强制封面过渡页结论句。 区分已发生事实、未来验证意图和建议；建议下一步验证不等于断言已经实现。",
+      "evidence_required": "整页内容＋页面角色",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "S02",
+      "level": "slide",
+      "name": "对象空间关系",
+      "definition": "对象间遮挡、错误覆盖、对齐、阅读顺序；有意叠层不视错。",
+      "evidence_required": "整页像素，可辅助bbox；同处O04缺陷不可重复扣",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "S03",
+      "level": "slide",
+      "name": "密度与留白功能",
+      "definition": "信息量适配受众/独立阅读或演讲；留白是否支撑分组和聚焦。 不能只因空白多或未给未知业务数值就扣分；必须指出对当前沟通目标的实际损害。",
+      "evidence_required": "整页与观看用途；不采用统一留白百分比",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "S04",
+      "level": "slide",
+      "name": "视觉层级与重点",
+      "definition": "主次、数字归属、图例和注释层级清晰；避免多个竞争主结论。 计算解释、教学复述或必要的可核验公式不自动算冗余。",
+      "evidence_required": "完整页面像素与任务目的",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "S05",
+      "level": "slide",
+      "name": "图表与文字一致",
+      "definition": "图中对象、趋势、数量、时间范围与旁文/标题一致。",
+      "evidence_required": "图表/图像＋相关文字的可读证据",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "S06",
+      "level": "slide",
+      "name": "配图语义与价值",
+      "definition": "配图支撑场景、论证或情感任务；不按有无图片机械奖分。",
+      "evidence_required": "图像与本页信息目标；无配图可按适用性说明N/A",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "S07",
+      "level": "slide",
+      "name": "关系表达有效",
+      "definition": "比较、流程、因果、组织、层级是否用准确结构表达；不奖励无功能装饰。",
+      "evidence_required": "可见关系与应表达的业务关系",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "S08",
+      "level": "slide",
+      "name": "局部视觉协调",
+      "definition": "本页配色、字体、形状、线条与主题一致；具体风格可多样。",
+      "evidence_required": "整页像素＋有无品牌/样张约束",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "page"
+    },
+    {
+      "id": "D01",
+      "level": "deck",
+      "name": "任务覆盖与受众适配",
+      "definition": "按Query、输入事实、受众、页数/输出约束完成任务；无Query不能猜全部意图。",
+      "evidence_required": "Query/上下文＋全页清单",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "deck"
+    },
+    {
+      "id": "D02",
+      "level": "deck",
+      "name": "故事线与页序",
+      "definition": "问题到展开到结论的依赖、过渡、论点推进可跟随，避免倒置。",
+      "evidence_required": "完整按序页面；不以单页代表全文",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "deck"
+    },
+    {
+      "id": "D03",
+      "level": "deck",
+      "name": "信息取舍与重复",
+      "definition": "信息覆盖充分且不冗余；跨页重复须有新的沟通功能。",
+      "evidence_required": "全稿＋输入材料（有则核对遗漏）",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "deck"
+    },
+    {
+      "id": "D04",
+      "level": "deck",
+      "name": "跨页事实和术语一致",
+      "definition": "数字/单位/定义/时间/结论在跨页不自相矛盾；单页错误已有主扣时仅引用。 对象数值错误传播到全稿时沿用同一根因，即使模型生成不同ID也须语义合并。",
+      "evidence_required": "至少两个相关页面及同口径定义",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "deck"
+    },
+    {
+      "id": "D05",
+      "level": "deck",
+      "name": "整稿视觉系统",
+      "definition": "标题/字体/色彩/图表/页脚/品牌是否形成一致系统；允许分章变体。 语义配色、章节变体或图表强调色变化不自动表示系统失控。",
+      "evidence_required": "整稿总览＋逐页像素",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "deck"
+    },
+    {
+      "id": "D06",
+      "level": "deck",
+      "name": "节奏与版式变化",
+      "definition": "页面角色、密度、论证图式有功能性的变化；不追求模板数最大。",
+      "evidence_required": "完整页序＋用途/时长（若提供）",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "deck"
+    },
+    {
+      "id": "D07",
+      "level": "deck",
+      "name": "演讲稿与页序协同",
+      "definition": "提供的演讲稿/备注是否与每页主旨及先后依赖一致。未提供稿件UNKNOWN。",
+      "evidence_required": "用户演讲稿或显式指定的讲稿；备注仅在用户指定为讲稿时使用",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "deck"
+    },
+    {
+      "id": "D08",
+      "level": "deck",
+      "name": "开场与收束",
+      "definition": "开头明确任务、正文支持目的、结尾形成所需结论/行动/学习检验。",
+      "evidence_required": "全稿角色＋用途，不要求每稿都商业行动号召",
+      "weight": 1,
+      "provenance": "原创综合规则；源映射见sources.md；等权为实验默认，不是来源共识",
+      "target_scope": "deck"
+    }
+  ],
+  "evaluation_unit": "rendered_page",
+  "level_labels": {
+    "object": "页内细节",
+    "slide": "单页表达",
+    "deck": "整稿"
+  }
+}

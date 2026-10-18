@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.*
+private/
+local/
+runs/
+*.key
+*.pem
+*.token
+evaluation/
+artifacts/
+*.pptx
+*.pdf
+*.zip

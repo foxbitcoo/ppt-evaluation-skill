@@ -1,0 +1,4 @@
+interface:
+  display_name: "PPT评测"
+  short_description: "按最终页面评测细节、单页表达与整稿，给出分项分数、覆盖率和具体修改建议"
+  default_prompt: "请使用 $ppt-evaluation 按页面图片评测这份PPT，给出三层分项分数、覆盖率、需修改的页面与具体改法。"

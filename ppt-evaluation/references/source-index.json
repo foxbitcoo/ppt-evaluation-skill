@@ -1,0 +1,523 @@
+{
+  "checked_on": "2026-10-18",
+  "scope": "Metadata and source links only; no upstream full texts or code bundled",
+  "sources": [
+    {
+      "id": "op7418__guizang-ppt-skill",
+      "repository": "https://github.com/op7418/guizang-ppt-skill",
+      "commit": "c91369c449d34755d320a8b81d0734000d99d1ab",
+      "license": "AGPL-3.0",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/op7418/guizang-ppt-skill/c91369c449d34755d320a8b81d0734000d99d1ab/SKILL.md",
+          "sha256": "57f046e2c8600bb9d5de9dafc6ff1860d13e28eb0d94c6790c58e8ca8ca5e839"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/op7418/guizang-ppt-skill/c91369c449d34755d320a8b81d0734000d99d1ab/LICENSE",
+          "sha256": "0d96a4ff68ad6d4b6f1f30f713b18d5184912ba8dd389f86aa7710db079abcb0"
+        },
+        {
+          "path": "references/checklist.md",
+          "url": "https://raw.githubusercontent.com/op7418/guizang-ppt-skill/c91369c449d34755d320a8b81d0734000d99d1ab/references/checklist.md",
+          "sha256": "8a7f55634ce113f4932d5cc835e17b81ce479c91953cf7ff1d28b979714b42b9"
+        },
+        {
+          "path": "references/swiss-layout-lock.md",
+          "url": "https://raw.githubusercontent.com/op7418/guizang-ppt-skill/c91369c449d34755d320a8b81d0734000d99d1ab/references/swiss-layout-lock.md",
+          "sha256": "5eeadd9648fade569e305d6928a4dfb93b841a4fb38eda249a5ad380c3abe217"
+        },
+        {
+          "path": "references/screenshot-framing.md",
+          "url": "https://raw.githubusercontent.com/op7418/guizang-ppt-skill/c91369c449d34755d320a8b81d0734000d99d1ab/references/screenshot-framing.md",
+          "sha256": "981ee5f10878a7cf039d31092ba8e76da6cf37b06144ea464df85afe19ea940b"
+        },
+        {
+          "path": "references/presenter-mode.md",
+          "url": "https://raw.githubusercontent.com/op7418/guizang-ppt-skill/c91369c449d34755d320a8b81d0734000d99d1ab/references/presenter-mode.md",
+          "sha256": "30b93637e96459ba70c5011e0c46ef5bb5763e5a3c8de317a85dffa7b3a09426"
+        },
+        {
+          "path": "scripts/validate-swiss-deck.mjs",
+          "url": "https://raw.githubusercontent.com/op7418/guizang-ppt-skill/c91369c449d34755d320a8b81d0734000d99d1ab/scripts/validate-swiss-deck.mjs",
+          "sha256": "86735de23bb91cc3b4d9bfc5d9f956b5b02bdc0f14c96da2010617b4e660d4d5"
+        },
+        {
+          "path": "scripts/validate-presenter-mode.mjs",
+          "url": "https://raw.githubusercontent.com/op7418/guizang-ppt-skill/c91369c449d34755d320a8b81d0734000d99d1ab/scripts/validate-presenter-mode.mjs",
+          "sha256": "7a074b7f122b6c8fed9d0e0cdf27067f64516a48de436e432bb9783d24e8a579"
+        }
+      ]
+    },
+    {
+      "id": "JimLiu__baoyu-skills",
+      "repository": "https://github.com/JimLiu/baoyu-skills",
+      "commit": "1567581c26ec29f4216c6e6835415bf30343b0e3",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/JimLiu/baoyu-skills/1567581c26ec29f4216c6e6835415bf30343b0e3/LICENSE",
+          "sha256": "601839401f6ce68b7a8aec0f7ba247ab8ef0848113378220bec4b2615cc84ee7"
+        },
+        {
+          "path": "skills/baoyu-slide-deck/SKILL.md",
+          "url": "https://raw.githubusercontent.com/JimLiu/baoyu-skills/1567581c26ec29f4216c6e6835415bf30343b0e3/skills/baoyu-slide-deck/SKILL.md",
+          "sha256": "0e988f065a1886224a501614d059e90019360ccce9fc5f5417e8719e5777efd8"
+        },
+        {
+          "path": "skills/baoyu-slide-deck/references/analysis-framework.md",
+          "url": "https://raw.githubusercontent.com/JimLiu/baoyu-skills/1567581c26ec29f4216c6e6835415bf30343b0e3/skills/baoyu-slide-deck/references/analysis-framework.md",
+          "sha256": "fbd91e7268b1b6f501d6479f946d1b8fbfd4c99cc561b60c7a5c8672d8be565b"
+        },
+        {
+          "path": "skills/baoyu-slide-deck/references/base-prompt.md",
+          "url": "https://raw.githubusercontent.com/JimLiu/baoyu-skills/1567581c26ec29f4216c6e6835415bf30343b0e3/skills/baoyu-slide-deck/references/base-prompt.md",
+          "sha256": "cf345f2a37469b00e66b2ef0f929dea871f6caf22abe03ec496654d3c39c532e"
+        },
+        {
+          "path": "skills/baoyu-slide-deck/references/content-rules.md",
+          "url": "https://raw.githubusercontent.com/JimLiu/baoyu-skills/1567581c26ec29f4216c6e6835415bf30343b0e3/skills/baoyu-slide-deck/references/content-rules.md",
+          "sha256": "40e28a16d03c26d50b7dfcfcd4a07b88e906405ce77a847dfa35006f7c8be6de"
+        },
+        {
+          "path": "skills/baoyu-slide-deck/references/design-guidelines.md",
+          "url": "https://raw.githubusercontent.com/JimLiu/baoyu-skills/1567581c26ec29f4216c6e6835415bf30343b0e3/skills/baoyu-slide-deck/references/design-guidelines.md",
+          "sha256": "00b85a3982fd7f78f77b02cdbc835db25c3a73e77b3670044014e8474cd919a6"
+        },
+        {
+          "path": "skills/baoyu-slide-deck/references/modification-guide.md",
+          "url": "https://raw.githubusercontent.com/JimLiu/baoyu-skills/1567581c26ec29f4216c6e6835415bf30343b0e3/skills/baoyu-slide-deck/references/modification-guide.md",
+          "sha256": "718928981881d50d9906acd47650e2cd35d40e74cdfd0b38fc35c7224e2f985d"
+        },
+        {
+          "path": "skills/baoyu-slide-deck/references/dimensions/density.md",
+          "url": "https://raw.githubusercontent.com/JimLiu/baoyu-skills/1567581c26ec29f4216c6e6835415bf30343b0e3/skills/baoyu-slide-deck/references/dimensions/density.md",
+          "sha256": "25c535b2bed552c1774c73a132e0cb46c1a40b7f4e6727aeb4d11568f7a9ced4"
+        },
+        {
+          "path": "skills/baoyu-slide-deck/references/outline-template.md",
+          "url": "https://raw.githubusercontent.com/JimLiu/baoyu-skills/1567581c26ec29f4216c6e6835415bf30343b0e3/skills/baoyu-slide-deck/references/outline-template.md",
+          "sha256": "266afb67682f14f098bb54bcbacf49b744a589ece3039f4c60dc6bc49af5ea12"
+        }
+      ]
+    },
+    {
+      "id": "alchaincyf__huashu-design",
+      "repository": "https://github.com/alchaincyf/huashu-design",
+      "commit": "798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/SKILL.md",
+          "sha256": "63cbc2ffcfd99f7b8acb6ff92adbbbba4bfaeec84373703d81df6a6fc6055a23"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/LICENSE",
+          "sha256": "6d6a2a9caf2e6d2b76974050427053b2892d8aa4c33fd168ce63a537fcee9d96"
+        },
+        {
+          "path": "references/critique-guide.md",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/references/critique-guide.md",
+          "sha256": "3636ed8422bb88a11bc3e1db00b252b707f20cf83f6ec900077abb020ff7a8ce"
+        },
+        {
+          "path": "references/verification.md",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/references/verification.md",
+          "sha256": "2481be020d5253efebcc6dd1a3bea80db25c1d03ce92d5a0347124c7407b366c"
+        },
+        {
+          "path": "references/content-guidelines.md",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/references/content-guidelines.md",
+          "sha256": "d9e1f08740bc6a1327b9bedaafad37b9791a1640a3b13b686b53f4a9483414e2"
+        },
+        {
+          "path": "references/modules/deck.md",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/references/modules/deck.md",
+          "sha256": "40841180c49b73230261c1f9ad53f2cb273c553bab1879d5abecf0914996c5fd"
+        },
+        {
+          "path": "references/slide-decks.md",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/references/slide-decks.md",
+          "sha256": "f7c67305f9f169c6ce86bb35ddf5fd0b95bd543822f7aa0e27f0f66bbd95ac05"
+        },
+        {
+          "path": "references/typography.md",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/references/typography.md",
+          "sha256": "4aae63d6bc39a0f67a05398b11bc381b7190f51bb7cd83f1a933f2e7551984cb"
+        },
+        {
+          "path": "references/design-context.md",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/references/design-context.md",
+          "sha256": "93a7e6be5f6cb29076d3651747d5033701362ddd03283b1ddf11b105757430b6"
+        },
+        {
+          "path": "scripts/verify.py",
+          "url": "https://raw.githubusercontent.com/alchaincyf/huashu-design/798c4235ebff03d5c45e3c8affdf5e9d18f9dfa7/scripts/verify.py",
+          "sha256": "7a0a3243f51a1c816944a948a5caba239c63c9890327a60d80934d493153e9e4"
+        }
+      ]
+    },
+    {
+      "id": "zarazhangrui__frontend-slides",
+      "repository": "https://github.com/zarazhangrui/frontend-slides",
+      "commit": "9906a34d640d2111f724544cbc50f7f130569ae1",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/zarazhangrui/frontend-slides/9906a34d640d2111f724544cbc50f7f130569ae1/SKILL.md",
+          "sha256": "832994fe1dfcce2aa7ceca9a1b7b708eca94becef242713999855f4e946cf4d5"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/zarazhangrui/frontend-slides/9906a34d640d2111f724544cbc50f7f130569ae1/LICENSE",
+          "sha256": "62928eb197fe4662d1efc3af0735b3ba5df3c0308badd9a2baf2b619009f5366"
+        },
+        {
+          "path": "STYLE_PRESETS.md",
+          "url": "https://raw.githubusercontent.com/zarazhangrui/frontend-slides/9906a34d640d2111f724544cbc50f7f130569ae1/STYLE_PRESETS.md",
+          "sha256": "b0093ae6f9c295e561c7d4a9ddf69d0edfd2810b1721ba1c2022a1ad9681c82c"
+        },
+        {
+          "path": "html-template.md",
+          "url": "https://raw.githubusercontent.com/zarazhangrui/frontend-slides/9906a34d640d2111f724544cbc50f7f130569ae1/html-template.md",
+          "sha256": "893ab49200ed5c3186d3b031333f5b61916b179dad2dafd5572ff8f66cd0b91a"
+        },
+        {
+          "path": "viewport-base.css",
+          "url": "https://raw.githubusercontent.com/zarazhangrui/frontend-slides/9906a34d640d2111f724544cbc50f7f130569ae1/viewport-base.css",
+          "sha256": "7424eb3fca809d85eedb3019a7b5bff571dc553c7b73b02120d068e12b2a6a03"
+        }
+      ]
+    },
+    {
+      "id": "Pikapika260214__rw-consulting-ppt",
+      "repository": "https://github.com/Pikapika260214/rw-consulting-ppt",
+      "commit": "729918fde106c3923d898d0c411b77c8d4e7615f",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/LICENSE",
+          "sha256": "2e5e228882689621fa2cbefb8dd84f6c35a8ba39cac0bf53495450bbd6c56869"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/SKILL.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/SKILL.md",
+          "sha256": "771aa351df928f5d549c0bdf532f341fc8ef92852cc6f39ff5e9d2439eee5bc5"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/references/sample-rejection-rubric.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/references/sample-rejection-rubric.md",
+          "sha256": "967d417f1ee9079a21693ae2132cd82e25ac2f6f3357ff724417059e7f0ad0d0"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/references/deck-consistency-lock.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/references/deck-consistency-lock.md",
+          "sha256": "2cd8db6fd017f55b752738cabe60dd09c6deb813cb15f2b7f88d0b44ee455be3"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/references/message-hierarchy-rules.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/references/message-hierarchy-rules.md",
+          "sha256": "fcf91f028053574649d2bf02fed90a4e8ed1f773a64bf660c9abbaccf8eee985"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/references/message-proof-mapping.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/references/message-proof-mapping.md",
+          "sha256": "67d02831effaa8e699b7759548a1ae6fe3581a04de7a536d07278bd484469186"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/references/image-only-output-contract.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/references/image-only-output-contract.md",
+          "sha256": "bb2136b4b0a537c480d1983fbecc6070281c0487d6582858128b5bcba7d0c575"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/references/visual-style-master.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/references/visual-style-master.md",
+          "sha256": "bfe66f2f5e002c9e1cfd00477f667b2ccc6650494e00dff64d44bc347500b85e"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/references/example-lessons.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/references/example-lessons.md",
+          "sha256": "80d3544112dacfa53ab9b96180be0bbbd7de1b73a75750395bdebd14e2c36df2"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/references/consulting-image-context.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/references/consulting-image-context.md",
+          "sha256": "1b0cdd87cf3e6c9c9837535e02cde549e2b72f5599971c72c6fd609ca44bbc6c"
+        },
+        {
+          "path": "skills/rw-consulting-ppt/references/concept-image-director.md",
+          "url": "https://raw.githubusercontent.com/Pikapika260214/rw-consulting-ppt/729918fde106c3923d898d0c411b77c8d4e7615f/skills/rw-consulting-ppt/references/concept-image-director.md",
+          "sha256": "396766d3686c693bbb0e8d7a916f8eac65f2b15d5e7b80df107580a567793a70"
+        }
+      ]
+    },
+    {
+      "id": "ken861222__PPT-Skill",
+      "repository": "https://github.com/ken861222/PPT-Skill",
+      "commit": "dffb31139df251ef147624177c42ef10f435c0d8",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "url": "https://raw.githubusercontent.com/ken861222/PPT-Skill/dffb31139df251ef147624177c42ef10f435c0d8/SKILL.md",
+          "sha256": "35c7eb72388017e270618360fe6714aa39a3e5006581abdcfe28193c5b71ea12"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://raw.githubusercontent.com/ken861222/PPT-Skill/dffb31139df251ef147624177c42ef10f435c0d8/LICENSE",
+          "sha256": "9d41f1041709ab201f205b02493ada03f7eec637096596b75fecf53fd3daad9c"
+        },
+        {
+          "path": "references/structure-architect-prompt.md",
+          "url": "https://raw.githubusercontent.com/ken861222/PPT-Skill/dffb31139df251ef147624177c42ef10f435c0d8/references/structure-architect-prompt.md",
+          "sha256": "ec8fef1216e15c1369103199e9d75bb2a4bec2520a622aa1e903c66a75487f59"
+        },
+        {
+          "path": "references/svg-generation-prompt.md",
+          "url": "https://raw.githubusercontent.com/ken861222/PPT-Skill/dffb31139df251ef147624177c42ef10f435c0d8/references/svg-generation-prompt.md",
+          "sha256": "eee2cda63385cdd3dbcaf0d20ce29c610aa1dbb17b1c5e408757cf79cc633dbd"
+        },
+        {
+          "path": "references/svg-layout-rules.md",
+          "url": "https://raw.githubusercontent.com/ken861222/PPT-Skill/dffb31139df251ef147624177c42ef10f435c0d8/references/svg-layout-rules.md",
+          "sha256": "5f9f0ca33bf57dbf03d9d7875762c72fe72e3446f31be098c75f4ada0b06c22c"
+        },
+        {
+          "path": "templates/page-planning-template.md",
+          "url": "https://raw.githubusercontent.com/ken861222/PPT-Skill/dffb31139df251ef147624177c42ef10f435c0d8/templates/page-planning-template.md",
+          "sha256": "8ca09f04a1b94af880a0960ccddbb135d124c70f8453c3df5bfc494b11bc7070"
+        }
+      ]
+    },
+    {
+      "id": "openai-slides",
+      "repository": "https://github.com/openai/skills",
+      "commit": "e6afb0d74cc75d220df2faf3dd6c635c2dc6a108",
+      "license": "Apache-2.0",
+      "files": [
+        {
+          "path": "skills/.curated/slides/LICENSE.txt",
+          "url": "https://github.com/openai/skills/blob/e6afb0d74cc75d220df2faf3dd6c635c2dc6a108/skills/.curated/slides/LICENSE.txt",
+          "sha256": "9a7110fc2d2f964038e5dc49128f908f29f47a574c961cba16085914e879cbda"
+        },
+        {
+          "path": "skills/.curated/slides/SKILL.md",
+          "url": "https://github.com/openai/skills/blob/e6afb0d74cc75d220df2faf3dd6c635c2dc6a108/skills/.curated/slides/SKILL.md",
+          "sha256": "57ee0941f872546029bc45b5b0bd58d4a02d88b84d4e8e4275c466da5451efa6"
+        },
+        {
+          "path": "skills/.curated/slides/assets/pptxgenjs_helpers/layout.js",
+          "url": "https://github.com/openai/skills/blob/e6afb0d74cc75d220df2faf3dd6c635c2dc6a108/skills/.curated/slides/assets/pptxgenjs_helpers/layout.js",
+          "sha256": "774076d2671697c56c9df7d968c7f46be337dd7d63508d75e0f6976237a5db96"
+        },
+        {
+          "path": "skills/.curated/slides/scripts/slides_test.py",
+          "url": "https://github.com/openai/skills/blob/e6afb0d74cc75d220df2faf3dd6c635c2dc6a108/skills/.curated/slides/scripts/slides_test.py",
+          "sha256": "916882b8a88b7fe39e76c9009cbef3afa6a29a9e626d160b198c04f7f6a6a69b"
+        }
+      ]
+    },
+    {
+      "id": "pptagent-ppteval",
+      "repository": "https://github.com/icip-cas/PPTAgent",
+      "commit": "d53296bc0ddd73e81d51c523d20dd711c7f233f3",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/icip-cas/PPTAgent/blob/d53296bc0ddd73e81d51c523d20dd711c7f233f3/LICENSE",
+          "sha256": "e1faa9265adfb5feb24c4be691b5c39b559dec4f0414d9ec3a1157cf94faaf8b"
+        },
+        {
+          "path": "pptagent/ppteval.py",
+          "url": "https://github.com/icip-cas/PPTAgent/blob/d53296bc0ddd73e81d51c523d20dd711c7f233f3/pptagent/ppteval.py",
+          "sha256": "a802cda939d37abcccc62308409c399420d34a3216e2f4f9fb62455b461bb933"
+        },
+        {
+          "path": "pptagent/prompts/ppteval/ppteval_coherence.txt",
+          "url": "https://github.com/icip-cas/PPTAgent/blob/d53296bc0ddd73e81d51c523d20dd711c7f233f3/pptagent/prompts/ppteval/ppteval_coherence.txt",
+          "sha256": "b651c05fdda9170d8e4ba8966cd13ebec9f5498aeb5f9686db9aab4141097cff"
+        },
+        {
+          "path": "pptagent/prompts/ppteval/ppteval_content.txt",
+          "url": "https://github.com/icip-cas/PPTAgent/blob/d53296bc0ddd73e81d51c523d20dd711c7f233f3/pptagent/prompts/ppteval/ppteval_content.txt",
+          "sha256": "c88de66daad4a1a46dd5c70b9f50327257851235f04a2ddc70f650b5fdeaefb5"
+        },
+        {
+          "path": "pptagent/prompts/ppteval/ppteval_style.txt",
+          "url": "https://github.com/icip-cas/PPTAgent/blob/d53296bc0ddd73e81d51c523d20dd711c7f233f3/pptagent/prompts/ppteval/ppteval_style.txt",
+          "sha256": "a8152386ce46d4382fe19b77ac667e35a2d2be9ea9e58a244f402d28829b5b3b"
+        },
+        {
+          "path": "pptagent/prompts/ppteval/ppteval_describe_content.txt",
+          "url": "https://github.com/icip-cas/PPTAgent/blob/d53296bc0ddd73e81d51c523d20dd711c7f233f3/pptagent/prompts/ppteval/ppteval_describe_content.txt",
+          "sha256": "51822daf5243abc455f555ce6b5cbcfbf1965a56d32fb5f0a46f582a9f9775df"
+        },
+        {
+          "path": "pptagent/prompts/ppteval/ppteval_describe_style.txt",
+          "url": "https://github.com/icip-cas/PPTAgent/blob/d53296bc0ddd73e81d51c523d20dd711c7f233f3/pptagent/prompts/ppteval/ppteval_describe_style.txt",
+          "sha256": "86542f06bdbc2195ec622d95d1ffbf2ecb6a1a1cd547b103783b8267013dadef"
+        }
+      ]
+    },
+    {
+      "id": "autopresent-slidesbench",
+      "repository": "https://github.com/para-lost/AutoPresent",
+      "commit": "98e0c012e89469863d9c3c8bc87eac967d82b2e6",
+      "license": "MIT (verified LICENSE at pinned commit)",
+      "files": [
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/para-lost/AutoPresent/blob/98e0c012e89469863d9c3c8bc87eac967d82b2e6/LICENSE",
+          "sha256": "11ca037542ccad1b045ea883322c0df97dadaaabc77061a90d9bcd078e98842a"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/para-lost/AutoPresent/blob/98e0c012e89469863d9c3c8bc87eac967d82b2e6/README.md",
+          "sha256": "38834716f700681342f64d3735567d25f78c861efada67e8ab9a7fc6fe9836eb"
+        },
+        {
+          "path": "evaluate/reference_free_eval.py",
+          "url": "https://github.com/para-lost/AutoPresent/blob/98e0c012e89469863d9c3c8bc87eac967d82b2e6/evaluate/reference_free_eval.py",
+          "sha256": "75ec01ce9be6817adb6f48fa34689f693ecf3184af428b195011a5de92f397cb"
+        },
+        {
+          "path": "evaluate/slides_eval.py",
+          "url": "https://github.com/para-lost/AutoPresent/blob/98e0c012e89469863d9c3c8bc87eac967d82b2e6/evaluate/slides_eval.py",
+          "sha256": "034635e19f34dac68afa97b341b410ae474b079e11e2193b7034e71796580192"
+        },
+        {
+          "path": "evaluate/page_eval.py",
+          "url": "https://github.com/para-lost/AutoPresent/blob/98e0c012e89469863d9c3c8bc87eac967d82b2e6/evaluate/page_eval.py",
+          "sha256": "978286a2349b24579f6b2b172265f654e6da73d85f788d37087dee78dc829f15"
+        },
+        {
+          "path": "evaluate/evaluate_all.py",
+          "url": "https://github.com/para-lost/AutoPresent/blob/98e0c012e89469863d9c3c8bc87eac967d82b2e6/evaluate/evaluate_all.py",
+          "sha256": "9516df157208dbab47f68f9444f81eccb5ce34cc8db234b3471e973840410bdf"
+        }
+      ]
+    },
+    {
+      "id": "slidesgen-bench",
+      "repository": "https://github.com/YunqiaoYang/SlidesGen-Bench",
+      "commit": "b202e60c39e19c5f9da57029fe53ff189e6642b0",
+      "license": "README asserts MIT but no LICENSE file found at pinned commit; redistribution NOT_VERIFIED",
+      "files": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/YunqiaoYang/SlidesGen-Bench/blob/b202e60c39e19c5f9da57029fe53ff189e6642b0/README.md",
+          "sha256": "4d68263a4b1a5f80f2a3728052dfb1de40ba3e44bc7fd1e25bd3423e32de394b"
+        },
+        {
+          "path": "eval/aesthetics_metrics.py",
+          "url": "https://github.com/YunqiaoYang/SlidesGen-Bench/blob/b202e60c39e19c5f9da57029fe53ff189e6642b0/eval/aesthetics_metrics.py",
+          "sha256": "7f3179540e603526c04669226e5804ca1b8aa3476996033b75440c2751fecf48"
+        },
+        {
+          "path": "eval/aesthetics_config.json",
+          "url": "https://github.com/YunqiaoYang/SlidesGen-Bench/blob/b202e60c39e19c5f9da57029fe53ff189e6642b0/eval/aesthetics_config.json",
+          "sha256": "9896733b16262aa5a1ca73e6dd03c703d0cd6eac73b2db11034ea7070bd682de"
+        },
+        {
+          "path": "eval/quantitative_eval.py",
+          "url": "https://github.com/YunqiaoYang/SlidesGen-Bench/blob/b202e60c39e19c5f9da57029fe53ff189e6642b0/eval/quantitative_eval.py",
+          "sha256": "41cc9bfc68677bbb07fa45f25c4bea3c44e4025d4506824e4c3c1f230b44f55a"
+        },
+        {
+          "path": "eval/calculate_quiz_accuracy.py",
+          "url": "https://github.com/YunqiaoYang/SlidesGen-Bench/blob/b202e60c39e19c5f9da57029fe53ff189e6642b0/eval/calculate_quiz_accuracy.py",
+          "sha256": "bb636577ecac29a6c40a0c323e88f2daea3c2b34a909256d404c3816a03fa5ca"
+        },
+        {
+          "path": "docs/LLM_EVALUATION.md",
+          "url": "https://github.com/YunqiaoYang/SlidesGen-Bench/blob/b202e60c39e19c5f9da57029fe53ff189e6642b0/docs/LLM_EVALUATION.md",
+          "sha256": "18a282068de927e644e89b9c060d332bbd13c03bdc869a26935a1a0526bef6d9"
+        },
+        {
+          "path": "docs/pei.md",
+          "url": "https://github.com/YunqiaoYang/SlidesGen-Bench/blob/b202e60c39e19c5f9da57029fe53ff189e6642b0/docs/pei.md",
+          "sha256": "58b1455949a1e1ebdd753b74466298cbc39df7840d02d145e9d5628389505fb6"
+        },
+        {
+          "path": "docs/Aesthetics_config.md",
+          "url": "https://github.com/YunqiaoYang/SlidesGen-Bench/blob/b202e60c39e19c5f9da57029fe53ff189e6642b0/docs/Aesthetics_config.md",
+          "sha256": "417250f7bd998772ce92e0df1d525f8fe5ffb2266cc13954245afb22f04a464f"
+        }
+      ]
+    },
+    {
+      "id": "microsoft-ppt-eval",
+      "repository": "https://github.com/microsoft/ppteval",
+      "commit": "1b8b55a29e48fdc65d423689b6f2370ad91beeea",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/microsoft/ppteval/blob/1b8b55a29e48fdc65d423689b6f2370ad91beeea/LICENSE",
+          "sha256": "820ff92d890bd6b411c38249f050d652ffb76c1bc750268be23fd75f4fc67f29"
+        },
+        {
+          "path": "README.md",
+          "url": "https://github.com/microsoft/ppteval/blob/1b8b55a29e48fdc65d423689b6f2370ad91beeea/README.md",
+          "sha256": "fe05a6a69baca99b5ebe24867e25a9be0d2e41362a1307679358d0b7bc386b28"
+        },
+        {
+          "path": "ppteval/graders/ppt_grader.py",
+          "url": "https://github.com/microsoft/ppteval/blob/1b8b55a29e48fdc65d423689b6f2370ad91beeea/ppteval/graders/ppt_grader.py",
+          "sha256": "bb2b103a7936e55701bfaccdb958deb602ecb1823751c1f88f2d566b97d20264"
+        },
+        {
+          "path": "ppteval/core/task.py",
+          "url": "https://github.com/microsoft/ppteval/blob/1b8b55a29e48fdc65d423689b6f2370ad91beeea/ppteval/core/task.py",
+          "sha256": "787ca899ef239a12822c700f56da2996a780137f7f49ab5c68c65fadbdd1a124"
+        },
+        {
+          "path": "ppteval/utils/powerpoint.py",
+          "url": "https://github.com/microsoft/ppteval/blob/1b8b55a29e48fdc65d423689b6f2370ad91beeea/ppteval/utils/powerpoint.py",
+          "sha256": "e3238e7392b6aa64a81b77c8f79645f4003c4009dc1f2b36f4f27d148164bbd5"
+        },
+        {
+          "path": "ppteval/verify/ppt/verifier.py",
+          "url": "https://github.com/microsoft/ppteval/blob/1b8b55a29e48fdc65d423689b6f2370ad91beeea/ppteval/verify/ppt/verifier.py",
+          "sha256": "aaba5615b8583c915dfaa2da7688f2017532a384d7efd48b681c11b82a244511"
+        },
+        {
+          "path": "task_registry/rubrics/Accounting Equation-001.json",
+          "url": "https://github.com/microsoft/ppteval/blob/1b8b55a29e48fdc65d423689b6f2370ad91beeea/task_registry/rubrics/Accounting%20Equation-001.json",
+          "sha256": "b5dc33f522651d2e6a114294858289819be777404324fa1f0d084f119435dffb"
+        },
+        {
+          "path": "task_registry/rubrics/3-002.json",
+          "url": "https://github.com/microsoft/ppteval/blob/1b8b55a29e48fdc65d423689b6f2370ad91beeea/task_registry/rubrics/3-002.json",
+          "sha256": "ecb30ae972a36c10c87f20ce6fcfe4d51c9430c1d29d5b48ff1f0137b9f7df06"
+        },
+        {
+          "path": "ATTRIBUTION.md",
+          "url": "https://github.com/microsoft/ppteval/blob/1b8b55a29e48fdc65d423689b6f2370ad91beeea/ATTRIBUTION.md",
+          "sha256": "d1bcfa4f5f003f0f45272f56446b8c6851a3fe03bdea08fba44bb36cb50cb34d"
+        }
+      ]
+    },
+    {
+      "id": "anthropic-pptx",
+      "repository": "https://github.com/anthropics/skills",
+      "commit": "dbd4588f9e1033efb41dad4bef2f7947c8993d44",
+      "license": "©2025 Anthropic; proprietary; retention/copy/derivative/distribution restrictions; metadata-only, no Skill contents archived",
+      "files": []
+    },
+    {
+      "id": "microsoft-accessibility",
+      "repository": "https://support.microsoft.com/en-us/accessibility/powerpoint/make-your-powerpoint-presentations-accessible-to-people-with-disabilities",
+      "commit": null,
+      "license": "Microsoft copyrighted support guidance; metadata and short original summary only; no full page redistributed",
+      "files": []
+    }
+  ]
+}
