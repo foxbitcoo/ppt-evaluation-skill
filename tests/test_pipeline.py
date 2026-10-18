@@ -16,6 +16,9 @@ class EndToEnd(unittest.TestCase):
                 for r in info['rules']:
                     missing=r['id'] in ['O02','D07'];rows.append({'rule_id':r['id'],'status':'UNCERTAIN'if missing else'GOOD','rating':None if missing else 3,'reason':'synthetic fixture; unavailable source/script'if missing else'fixture evidence','evidence':[]if missing else['Synthetic fixture: visible text'],'issues':[]})
                 if page==1:rows[0]['target_id']='native-object-wrong'
+                # Real providers may omit null for an unscored check. It must not abort the deck.
+                for row in rows:
+                    if row['rule_id']=='O05':row.update(status='NOT_APPLICABLE',reason='Synthetic page has no picture');row.pop('rating')
                 payload={'choices':[{'finish_reason':'stop','message':{'content':json.dumps({'summary':'synthetic local fixture, not a real evaluation','assessments':rows,'review_decisions':[]})}}],'model':'synthetic-fixture','usage':{'prompt_tokens':1,'completion_tokens':1,'total_tokens':2}}
                 body=json.dumps(payload).encode();self.send_response(200);self.send_header('Content-Type','application/json');self.end_headers();self.wfile.write(body)
         server=ThreadingHTTPServer(('127.0.0.1',0),Handler);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()

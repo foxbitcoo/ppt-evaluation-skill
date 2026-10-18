@@ -108,7 +108,8 @@ def normalize_stage(parsed, rules, page, context, source_pages):
             if row.get('page', page) != page: raise ValueError('Wrong source page')
             if row.get('target_id', expected) != expected: raise ValueError('Wrong page/deck target; native object IDs are not required')
             row.update(page=page, target_id=expected)
-            status, rating = row.get('status'), row.get('rating')
+            row.setdefault('rating', None)
+            status, rating = row.get('status'), row['rating']
             if status not in STATES: raise ValueError('Invalid assessment status')
             row.setdefault('reason', ''); row.setdefault('evidence', []); row.setdefault('issues', []); row.setdefault('related_issue_ids', [])
             if not isinstance(row['evidence'], list) or not isinstance(row['issues'], list): raise ValueError('Invalid evidence/issues list')

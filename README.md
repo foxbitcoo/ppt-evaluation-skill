@@ -2,7 +2,7 @@
 
 按最终页面效果评测PPT，输出**页内细节、单页表达、整稿**三个视角的分数、问题位置、修改建议和HTML/JSON报告。
 
-当前版本 **0.2.2-research**。量表未经人工标定，观察分与覆盖率一起展示，正式总分不默认合并；阅读版提供等权综合观察试算，不用于无人复核的产品排行榜。
+当前版本 **0.2.3-research**。量表未经人工标定，观察分与覆盖率一起展示，正式总分不默认合并；阅读版提供等权综合观察试算，不用于无人复核的产品排行榜。
 
 ## 评测流程
 
@@ -43,6 +43,8 @@ python ppt-evaluation/scripts/evaluate.py --manifest /path/run/manifest.json --c
 完整说明见 [SKILL.md](ppt-evaluation/SKILL.md)、[计分规则](ppt-evaluation/references/scoring.md)、[输入输出协议](ppt-evaluation/references/input-format.md)。
 
 ## 验证与限制
+
+v0.2.3修复模型在UNKNOWN/N/A判项中省略null评分字段时的中断；有分状态缺少评分仍单独隔离，不补分。
 
 ```bash
 python -m unittest discover -s tests -v

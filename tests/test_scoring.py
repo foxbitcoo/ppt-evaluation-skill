@@ -34,6 +34,16 @@ class PageProtocol(unittest.TestCase):
         self.assertEqual(s['levels']['slide']['coverage'],.5);self.assertIsNone(s['levels']['slide']['complete_score'])
     def test_na_requires_reason(self):
         a=self.good();a.update(status='NOT_APPLICABLE',rating=None,reason='');rows,events,_=self.normalize([a]);self.assertEqual(next(r for r in rows if r['rule_id']=='S01')['status'],'UNCERTAIN')
+    def test_unscored_missing_rating_is_canonical_null(self):
+        for state in ['UNCERTAIN', 'NOT_APPLICABLE']:
+            with self.subTest(state=state):
+                a=self.good();a.update(status=state,reason='No image or insufficient evidence');a.pop('rating')
+                rows,events,_=self.normalize([a]);row=next(x for x in rows if x['rule_id']=='S01')
+                self.assertIn('rating',row);self.assertIsNone(row['rating']);self.assertEqual(row['status'],state)
+                aggregate(rows,self.rules,manifest=self.manifest,context=self.context)
+    def test_scored_missing_rating_is_isolated(self):
+        a=self.good('O01');a.pop('rating');rows,events,_=self.normalize([a,self.good()]);by={r['rule_id']:r for r in rows}
+        self.assertIsNone(by['O01']['rating']);self.assertEqual(by['S01']['rating'],4);self.assertTrue(events)
     def test_missing_fact_cannot_be_false(self):
         a=self.defect('O02');a['issues'][0]['kind']='factual';rows,events,candidates=self.normalize([a]);self.assertIsNone(next(r for r in rows if r['rule_id']=='O02')['rating']);self.assertTrue(candidates)
     def test_numeric_source_proof_and_rounding(self):
