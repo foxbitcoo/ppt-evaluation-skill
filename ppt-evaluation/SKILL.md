@@ -1,6 +1,6 @@
 ---
 name: ppt-evaluation
-description: 按最终页面图片评测PPT/PPTX、PDF或截图，输出页内细节、单页表达、整稿三个视角的交付质量分、原页证据、双向比较与迭代建议，生成结论先行的HTML/JSON报告；适用于验收、同题多产品比较和有讲稿时的顺序核对，不默认修改或生成PPT。
+description: 按最终页面图片评测PPT/PPTX、PDF或截图，输出页内细节、单页表达、整稿三个视角的交付质量分、原页证据、多份总览及迭代建议，生成结论先行的HTML/JSON报告；适用于验收、同题多产品比较和有讲稿时的顺序核对，不默认修改或生成PPT。
 ---
 
 # PPT评测
@@ -41,7 +41,7 @@ python scripts/evaluate.py --manifest /path/run/manifest.json --context /path/co
 
 默认最多12次调用，临时网络错误最多重试1次并计入总预算；N页正常需要N＋1次。预算不足时给部分报告，不伪造全量完成；大稿可明确设置`--max-calls`。每次使用新输出目录，保留旧报告；接口异常不生成模拟分。记录请求/返回模型、时间、usage；精确构建或实际账单未提供就标未知。
 
-不配置API时，当前Agent可按同一协议填写真实评审再运行`report.py`；必须标明评审来源，不能冒充API或人工校准。显式复核用`review.py result.json decisions.json --reviewer "来源" --out 新目录`；同题批量入口为`batch.py`。多份结果默认交付分数对比首页，结论先行呈现综合评分、推荐者、三个视角的优缺点与原页证据；使用同一组权重，不用来回切换才能比较。已有结果用`compare_report.py entries.json --out comparison.html`直接生成，entries为含label/result_file/report的列表，不重新调用逐页评分。需要图文Insight时，先读[比较分析提示词](references/comparison-insight-prompt.md)，用`analyze_comparison.py entries.json --out 新分析目录`对最终分数与真实原页补一次分析，再由`compare_report.py --insights insights.json`生成报告。每视角分别解释两份的优点、主要差距和双向比较；整稿放完整拼图，页内/单页把提到的原页放在文字旁。每条必须有真实页码与输入证据ID，给可验收的迭代方案。模型分析不能改分；正文需核对原页，保留语法恢复和局部文字复核记录。
+不配置API时，当前Agent可按同一协议填写真实评审再运行`report.py`；必须标明评审来源，不能冒充API或人工校准。显式复核用`review.py result.json decisions.json --reviewer "来源" --out 新目录`；同题批量入口为`batch.py`。多份结果默认交付分数对比首页，结论先行呈现综合评分、推荐者、三个视角的优缺点与原页证据；使用同一组权重，不用来回切换才能比较。已有结果用`compare_report.py entries.json --out comparison.html`直接生成，entries为含label/result_file/report的列表，不重新调用逐页评分。需要图文Insight时，先读[比较分析提示词](references/comparison-insight-prompt.md)，用`analyze_comparison.py entries.json --out 新分析目录`对最终分数与真实原页补一次分析，再由`compare_report.py --insights insights.json`生成报告。两份时解释双向优势；三份及以上改为总体概述，每个视角逐一说明所有厂商的优点和主要差距，不展开两两配对，迭代建议覆盖每个厂商；整稿放完整拼图，页内/单页把提到的原页放在文字旁。每条必须有真实页码与输入证据ID，给可验收的迭代方案。模型分析不能改分；正文需核对原页，保留语法恢复和局部文字复核记录。
 
 ## 发布和旧版本
 

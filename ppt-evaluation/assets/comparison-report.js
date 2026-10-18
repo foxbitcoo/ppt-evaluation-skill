@@ -1,4 +1,4 @@
-/* One set of weights, two evidence-bound reports; no model calls. */
+/* One set of weights for every evidence-bound report; no model calls. */
 (function () {
  const data=JSON.parse(document.getElementById('comparison-data').textContent);
  const rules=[...document.querySelectorAll('[data-compare-rule]')],layers=[...document.querySelectorAll('[data-compare-layer]')];

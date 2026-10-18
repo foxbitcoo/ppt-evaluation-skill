@@ -13,6 +13,8 @@ def total_score(result):
 
 def validate_insights(insights, entries):
     decks = {e['id']:e for e in entries}
+    overview_mode = len(decks) > 2
+    if len(decks) != len(entries): raise ValueError('Deck IDs must be unique')
     expected = {k:total_score(e['result']) for k,e in decks.items()}
     if {x['deck_id']:x['score_100'] for x in insights['headline']['score_lines']} != expected:
         raise ValueError('Insight scores differ from final scoring results')
@@ -33,16 +35,23 @@ def validate_insights(insights, entries):
         if not item.get('evidence_ids') or any(x not in evidence for x in item['evidence_ids']): raise ValueError('Unknown or absent narrative evidence ID')
         if any(evidence[x] not in ref_decks for x in item['evidence_ids']): raise ValueError('Evidence and pictured deck disagree')
     for section in insights['level_sections']:
-        if {d['deck_id'] for d in section['decks']} != set(decks): raise ValueError('Missing deck analysis')
+        if len(section['decks']) != len(decks) or {d['deck_id'] for d in section['decks']} != set(decks): raise ValueError('Missing or repeated deck analysis')
+        if overview_mode:
+            if section['pairwise']: raise ValueError('Three or more decks require an overview, not pairwise comparisons')
+            if not isinstance(section.get('overview'),str) or not section['overview'].strip(): raise ValueError('Multi-deck section requires an overview')
         for d in section['decks']:
             if d['score_100'] != decks[d['deck_id']]['result']['scores']['levels'][section['level']]['observed_score']: raise ValueError('Level score mismatch')
             for finding in d['strengths']+d['deductions']: check(finding)
+            if any(r['deck_id'] != d['deck_id'] for finding in d['strengths']+d['deductions'] for r in finding['refs']): raise ValueError('A deck profile must cite its own pages')
         for pair in section['pairwise']:
             if {pair['left_id'],pair['right_id']}-set(decks): raise ValueError('Unknown comparison deck')
             for finding in pair['left_advantages']+pair['right_advantages']+pair['shared_gaps']:
                 check(finding)
                 if {r['deck_id'] for r in finding['refs']} != {pair['left_id'],pair['right_id']}: raise ValueError('Relative advantage must reference both decks')
     for action in insights['iteration_plan']: check(action)
+    if overview_mode:
+        covered = {r['deck_id'] for action in insights['iteration_plan'] for r in action['refs']}
+        if covered != set(decks): raise ValueError('The iteration plan must cover every deck')
     return insights
 
 def render_insights(insights, entries, asset_directory=None):
@@ -65,6 +74,7 @@ def render_insights(insights, entries, asset_directory=None):
     parts=['<section class="section insight-sections" id="insights"><h2>分数背后的判断与改法</h2>']
     for section in insights['level_sections']:
         lev=section['level'];parts.append('<section class="insight-level" id="insight-'+lev+'"><h2>'+LEVELS[lev]+'</h2>')
+        if section.get('overview'): parts.append('<p class="insight-overview">'+h(section['overview'])+'</p>')
         for pair in section['pairwise']:
             for item in pair['left_advantages']:parts.append(finding(item,h(decks[pair['left_id']]['label'])+'相对更好'))
             for item in pair['right_advantages']:parts.append(finding(item,h(decks[pair['right_id']]['label'])+'相对更好'))
